@@ -1,0 +1,15 @@
+{
+  "name": "heykriskay",
+  "description": "Claude Code plugins by heykriskay",
+  "owner": {
+    "name": "heykriskay",
+    "url": "https://github.com/heykriskay"
+  },
+  "plugins": [
+    {
+      "name": "dev-workflow",
+      "source": ".",
+      "description": "Idea → spec → plan → tested commits → PR, with you approving each step."
+    }
+  ]
+}

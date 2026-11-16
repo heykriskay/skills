@@ -1,0 +1,13 @@
+{
+  "name": "dev-workflow",
+  "version": "1.0.0",
+  "description": "Idea → spec → plan → tested commits → PR. Skills, agents and a lint hook for a test-first workflow with you approving each step.",
+  "author": {
+    "name": "heykriskay",
+    "url": "https://github.com/heykriskay"
+  },
+  "homepage": "https://github.com/heykriskay/claude-skills",
+  "repository": "https://github.com/heykriskay/claude-skills",
+  "license": "MIT",
+  "keywords": ["workflow", "tdd", "spec", "planning", "code-review", "commit", "pull-request"]
+}
