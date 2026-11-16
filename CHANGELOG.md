@@ -11,5 +11,4 @@ the plugin version lives in `.claude-plugin/plugin.json`.
 - Installable as the `kriskay-skills` Claude Code plugin from the `heykriskay` marketplace.
 - `scripts/validate.sh` and GitHub Actions CI, a link check and Dependabot.
 - One-click Release workflow that tags and publishes the version in `plugin.json`.
-- Logo, plugin icon, social preview image and an About page on GitHub Pages.
 - Decision records in `docs/decisions/`.

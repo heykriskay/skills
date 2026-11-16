@@ -1,14 +1,14 @@
 name: Links
 
-# Checks every link in the Markdown and HTML files.
+# Checks every link in the Markdown files.
 # Runs on changes to docs and once a week, since outside links break on their own.
 
 on:
   pull_request:
-    paths: ["**.md", "site/**"]
+    paths: ["**.md"]
   push:
     branches: [main]
-    paths: ["**.md", "site/**"]
+    paths: ["**.md"]
   schedule:
     - cron: "17 6 * * 1"
   workflow_dispatch:
@@ -24,5 +24,5 @@ jobs:
 
       - uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --exclude-path node_modules '**/*.md' 'site/**/*.html'
+          args: --no-progress --exclude-path node_modules '**/*.md'
           fail: true

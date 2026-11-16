@@ -1,2 +1,0 @@
-# Files copied into the site at build time (see .github/workflows/pages.yml)
-^file://.*/site/(logo|social-preview)\.png$

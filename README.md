@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/logo.png" alt="kriskay" width="120">
-</p>
-
 # Claude Code skills
 
 [![Validate](https://github.com/heykriskay/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/heykriskay/skills/actions/workflows/validate.yml)
