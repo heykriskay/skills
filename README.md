@@ -14,13 +14,13 @@ Feel free to use them, copy them or change them to fit your own workflow.
 **As a plugin** (easiest, gets updates). In Claude Code:
 
 ```
-/plugin install dev-workflow --marketplace heykriskay/claude-skills
+/plugin install kriskay-skills --marketplace heykriskay/claude-skills
 ```
 
 On Claude Code older than 2.1.275, run `/plugin marketplace add heykriskay/claude-skills` and then
-`/plugin install dev-workflow@heykriskay`.
+`/plugin install kriskay-skills@heykriskay`.
 
-Skills are then called with a prefix, like `/dev-workflow:commit`. The plugin includes the skills, agents and lint hook.
+Skills are then called with a prefix, like `/kriskay-skills:commit`. The plugin includes the skills, agents and lint hook.
 
 **Or copy the files**, if you also want the rules, status line and command log, or prefer plain names like `/commit`:
 

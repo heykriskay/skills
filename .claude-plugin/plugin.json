@@ -1,5 +1,5 @@
 {
-  "name": "dev-workflow",
+  "name": "kriskay-skills",
   "version": "1.0.0",
   "description": "Idea → spec → plan → tested commits → PR. Skills, agents and a lint hook for a test-first workflow with you approving each step.",
   "author": {

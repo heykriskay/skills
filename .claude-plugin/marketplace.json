@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "dev-workflow",
+      "name": "kriskay-skills",
       "source": ".",
       "description": "Idea → spec → plan → tested commits → PR, with you approving each step."
     }
