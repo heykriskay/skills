@@ -21,5 +21,9 @@ jobs:
       - name: Install Claude Code CLI (for plugin validation)
         run: npm install -g @anthropic-ai/claude-code
 
+      - name: Install actionlint (for workflow checks)
+        run: |
+          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/v1.7.7/scripts/download-actionlint.bash) 1.7.7 /usr/local/bin
+
       - name: Validate skills, scripts and plugin
         run: ./scripts/validate.sh

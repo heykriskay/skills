@@ -1,6 +1,10 @@
+<p align="center">
+  <img src="assets/logo.png" alt="kriskay" width="120">
+</p>
+
 # Claude Code skills
 
-[![Validate](https://github.com/heykriskay/claude-skills/actions/workflows/validate.yml/badge.svg)](https://github.com/heykriskay/claude-skills/actions/workflows/validate.yml)
+[![Validate](https://github.com/heykriskay/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/heykriskay/skills/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 This is my personal Claude Code setup, the skills I use every day. Some I wrote myself, and others I
@@ -14,10 +18,10 @@ Feel free to use them, copy them or change them to fit your own workflow.
 **As a plugin** (easiest, gets updates). In Claude Code:
 
 ```
-/plugin install kriskay-skills --marketplace heykriskay/claude-skills
+/plugin install kriskay-skills --marketplace heykriskay/skills
 ```
 
-On Claude Code older than 2.1.275, run `/plugin marketplace add heykriskay/claude-skills` and then
+On Claude Code older than 2.1.275, run `/plugin marketplace add heykriskay/skills` and then
 `/plugin install kriskay-skills@heykriskay`.
 
 Skills are then called with a prefix, like `/kriskay-skills:commit`. The plugin includes the skills, agents and lint hook.
@@ -25,8 +29,8 @@ Skills are then called with a prefix, like `/kriskay-skills:commit`. The plugin 
 **Or copy the files**, if you also want the rules, status line and command log, or prefer plain names like `/commit`:
 
 ```bash
-git clone https://github.com/heykriskay/claude-skills.git
-cd claude-skills && ./install.sh
+git clone https://github.com/heykriskay/skills.git
+cd skills && ./install.sh
 ```
 
 This copies everything into `~/.claude/`. Hooks and the status line need `jq`. Use one way, not both.
@@ -56,6 +60,10 @@ grilling → to-spec → to-plan → execute-plan → pr
 
 Also included: `agents/` (search, implementer, reviewer), `rules/` (Java, shell), `hooks/` (lint and command log),
 `statusline.sh`, and example settings in `examples/`.
+
+## Why it works this way
+
+The main choices (approval gates, test-first, two install options) are explained in [docs/decisions](docs/decisions/).
 
 ## Contributing
 

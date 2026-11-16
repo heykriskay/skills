@@ -5,7 +5,9 @@
 #   2. every .json file parses
 #   3. every skill and agent has frontmatter with a name and description,
 #      and each skill's name matches its folder
-#   4. `claude plugin validate --strict` (skipped if the claude CLI is missing)
+#   4. CHANGELOG.md has notes for the version in plugin.json
+#   5. actionlint on the GitHub workflows (skipped if missing)
+#   6. `claude plugin validate --strict` (skipped if the claude CLI is missing)
 
 set -Eeuo pipefail
 
@@ -59,6 +61,18 @@ for f in agents/*.md; do
   [[ -n $(field "$f" description) ]] || error "$f: description is missing"
 done
 echo "done"
+
+step "Changelog"
+./scripts/release-notes.sh >/dev/null || error "add a '## <version>' section to CHANGELOG.md for the version in plugin.json"
+echo "done"
+
+step "Workflows"
+if command -v actionlint >/dev/null; then
+  actionlint || fail=1
+  echo "done"
+else
+  echo "actionlint not installed, skipped"
+fi
 
 step "Plugin manifest"
 if command -v claude >/dev/null; then

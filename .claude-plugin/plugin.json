@@ -6,8 +6,8 @@
     "name": "heykriskay",
     "url": "https://github.com/heykriskay"
   },
-  "homepage": "https://github.com/heykriskay/claude-skills",
-  "repository": "https://github.com/heykriskay/claude-skills",
+  "homepage": "https://github.com/heykriskay/skills",
+  "repository": "https://github.com/heykriskay/skills",
   "license": "MIT",
   "keywords": ["workflow", "tdd", "spec", "planning", "code-review", "commit", "pull-request"]
 }

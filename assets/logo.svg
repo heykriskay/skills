@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="kriskay">
+  <!-- Source for logo.png and .claude-plugin/icon.png. Uses the Inter font (ExtraBold). -->
+  <rect width="512" height="512" rx="112" fill="#111827"/>
+  <text x="256" y="290" text-anchor="middle" font-family="Inter" font-weight="800" font-size="104" letter-spacing="-4" fill="#F9FAFB">kriskay<tspan fill="#34D399">.</tspan></text>
+</svg>
