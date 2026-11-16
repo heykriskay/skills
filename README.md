@@ -1,6 +1,10 @@
 # Claude Code skills
 
-Skills that take a feature from **idea → spec → plan → tested commits → PR**, with you approving each step.
+This is my personal Claude Code setup, the skills I use every day. Some I wrote myself, and others I
+adapted from open-source sets and trimmed to fit how I work. Together they take a feature from
+**idea → spec → plan → tested commits → PR**, and nothing gets built or committed without my OK.
+
+Feel free to use them, copy them or change them to fit your own workflow.
 
 ## Install
 
