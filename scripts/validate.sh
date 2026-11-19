@@ -8,6 +8,7 @@
 #   4. CHANGELOG.md has notes for the version in plugin.json
 #   5. actionlint on the GitHub workflows (skipped if missing)
 #   6. `claude plugin validate --strict` (skipped if the claude CLI is missing)
+#   7. hook tests (scripts/test-hooks.sh)
 
 set -Eeuo pipefail
 
@@ -81,6 +82,9 @@ if command -v claude >/dev/null; then
 else
   echo "claude CLI not installed, skipped (npm i -g @anthropic-ai/claude-code)"
 fi
+
+step "Hook tests"
+./scripts/test-hooks.sh || fail=1
 
 if ((fail)); then
   printf '\nValidation failed.\n' >&2

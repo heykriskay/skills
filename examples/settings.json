@@ -286,8 +286,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/verify.sh",
-            "timeout": 600
+            "command": "bash ~/.claude/hooks/verify.sh full",
+            "timeout": 900
           }
         ]
       }
@@ -301,6 +301,17 @@
             "command": "bash ~/.claude/hooks/guard-kube.sh",
             "timeout": 10,
             "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/verify.sh touched",
+            "timeout": 600
           }
         ]
       }

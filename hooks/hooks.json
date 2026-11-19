@@ -30,7 +30,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/verify.sh\"",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/verify.sh\" full",
+            "timeout": 900
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/verify.sh\" touched",
             "timeout": 600
           }
         ]
