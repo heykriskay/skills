@@ -4,6 +4,7 @@
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "300000",
     "BASH_MAX_TIMEOUT_MS": "1200000",
+    "CLAUDE_CODE_ENABLE_TODO_TOOLS": "1",
     "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE": "1",
     "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1",
     "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB": "1",
@@ -18,10 +19,6 @@
       "WebFetch(domain:code.claude.com)"
     ],
     "deny": [
-      "Bash(git push)",
-      "Bash(git push *)",
-      "Bash(git -C * push*)",
-      "Bash(git -c * push*)",
       "Bash(git reset --hard)",
       "Bash(git reset --hard *)",
       "Bash(git checkout -- *)",
@@ -29,14 +26,17 @@
       "Bash(git stash drop*)",
       "Bash(git stash clear)",
       "Bash(git clean -f*)",
-      "Bash(git branch -D*)",
-      "Bash(git rebase)",
-      "Bash(git rebase *)",
-      "Bash(git filter-branch)",
-      "Bash(git filter-branch *)",
-      "Bash(git commit --no-verify*)",
-      "Bash(git commit * --no-verify*)",
-      "Bash(git commit -n *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push * +*)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(rm -rf ..*)",
+      "Bash(rm -fr /*)",
+      "Bash(rm -fr ~*)",
+      "Bash(rm -fr ..*)",
       "Bash(security find-generic-password*)",
       "Bash(security find-internet-password*)",
       "Bash(security dump-keychain*)",
@@ -72,11 +72,24 @@
       "Edit(~/.claude/statusline.sh)"
     ],
     "ask": [
-      "Bash(git commit --amend*)",
+      "Bash(git push)",
+      "Bash(git push *)",
+      "Bash(git -C * push*)",
+      "Bash(git -c * push*)",
+      "Bash(gh pr create *)",
       "Bash(sudo *)"
     ],
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
+  },
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Source control: GitHub user heykriskay (github.com/heykriskay) and all repos under it",
+      "Internal package registry: none. Installs come from the public registries: npm (registry.npmjs.org), PyPI (pypi.org, files.pythonhosted.org), Maven Central (repo.maven.apache.org, repo1.maven.org), Gradle (plugins.gradle.org, services.gradle.org) and the Go module proxy (proxy.golang.org, sum.golang.org)",
+      "Trusted cloud buckets: none",
+      "Sensitive remote targets: every Kubernetes or OpenShift context except local ones (kind-*, k3d-*, minikube, docker-desktop, rancher-desktop, colima, crc)"
+    ]
   },
   "statusLine": {
     "type": "command",
@@ -189,6 +202,22 @@
           "mode": "deny"
         }
       ]
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "objects.githubusercontent.com",
+        "raw.githubusercontent.com",
+        "registry.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "repo.maven.apache.org",
+        "repo1.maven.org",
+        "plugins.gradle.org",
+        "services.gradle.org",
+        "proxy.golang.org",
+        "sum.golang.org"
+      ]
     }
   },
   "hooks": {
@@ -259,6 +288,19 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/verify.sh",
             "timeout": 600
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/guard-kube.sh",
+            "timeout": 10,
+            "onFailure": "block"
           }
         ]
       }
