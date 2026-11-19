@@ -1,7 +1,7 @@
 {
   "name": "kriskay-skills",
-  "version": "1.0.0",
-  "description": "Idea → spec → plan → tested commits → PR. Skills, agents and a lint hook for a test-first workflow with you approving each step.",
+  "version": "2.0.0",
+  "description": "A lean Claude Code setup that leans on the built-ins: spec and PR skills, a haiku search agent, and lint and verify hooks.",
   "author": {
     "name": "heykriskay",
     "url": "https://github.com/heykriskay"
@@ -9,5 +9,11 @@
   "homepage": "https://github.com/heykriskay/skills",
   "repository": "https://github.com/heykriskay/skills",
   "license": "MIT",
-  "keywords": ["workflow", "tdd", "spec", "planning", "code-review", "commit", "pull-request"]
+  "keywords": [
+    "workflow",
+    "spec",
+    "pull-request",
+    "hooks",
+    "verification"
+  ]
 }

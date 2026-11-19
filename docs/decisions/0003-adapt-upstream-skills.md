@@ -1,6 +1,6 @@
 # 0003: Adapt and trim proven skills instead of writing all from scratch
 
-- **Status:** Accepted
+- **Status:** Superseded by [0006](0006-lean-on-built-ins.md)
 - **Date:** 2026-11-16
 
 ## Context

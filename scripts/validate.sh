@@ -43,7 +43,7 @@ done < <(git ls-files '*.json')
 echo "done"
 
 step "Skills"
-for dir in skills/*/; do
+for dir in skills/*/ plugins/*/skills/*/; do
   dir=${dir%/}
   name=$(basename "$dir")
   f="$dir/SKILL.md"
@@ -53,10 +53,10 @@ for dir in skills/*/; do
   [[ $name =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] || error "$f: folder name must be kebab-case"
   [[ -f $dir/README.md ]] && error "$dir: put docs in SKILL.md or references/, not README.md"
 done
-echo "$(find skills -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ') skills checked"
+echo "$(find skills plugins/*/skills -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ') skills checked"
 
 step "Agents"
-for f in agents/*.md; do
+for f in agents/*.md plugins/*/agents/*.md; do
   [[ -n $(field "$f" name) ]] || error "$f: name is missing"
   [[ -n $(field "$f" description) ]] || error "$f: description is missing"
 done
@@ -77,6 +77,7 @@ fi
 step "Plugin manifest"
 if command -v claude >/dev/null; then
   claude plugin validate --strict . || fail=1
+  for p in plugins/*/; do claude plugin validate --strict "$p" || fail=1; done
 else
   echo "claude CLI not installed, skipped (npm i -g @anthropic-ai/claude-code)"
 fi

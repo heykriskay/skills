@@ -1,6 +1,6 @@
 # 0005: Multi-agent orchestration is optional
 
-- **Status:** Accepted
+- **Status:** Accepted, amended by [0006](0006-lean-on-built-ins.md)
 - **Date:** 2026-11-16
 
 ## Context

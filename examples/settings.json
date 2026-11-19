@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 30,
-  "model": "sonnet",
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "300000",
     "BASH_MAX_TIMEOUT_MS": "1200000",
@@ -15,23 +14,7 @@
   },
   "permissions": {
     "allow": [
-      "WebFetch(domain:code.claude.com)",
-      "Bash(hc ls*)",
-      "Bash(hc get *)",
-      "Bash(hc read *)",
-      "Bash(hc wait*)",
-      "Bash(hc templates*)",
-      "Bash(hc label *)",
-      "Bash(hc kill *)",
-      "Bash(hc rm *)",
-      "Bash(hc interrupt *)",
-      "Bash(hc --skill)",
-      "Bash(herdr-app ls*)",
-      "Bash(herdr-app status*)",
-      "Bash(herdr-app commands*)",
-      "Bash(herdr-app shot*)",
-      "Bash(herdr-app --skill)",
-      "Bash(herdr --skill)"
+      "WebFetch(domain:code.claude.com)"
     ],
     "deny": [
       "Bash(git push)",
@@ -88,7 +71,6 @@
       "Edit(~/.claude/statusline.sh)"
     ],
     "ask": [
-      "Agent(model:opus)",
       "Bash(git commit --amend*)",
       "Bash(sudo *)"
     ],
@@ -111,13 +93,6 @@
         "~/.claude/agents",
         "~/.claude/rules",
         "~/.claude/statusline.sh"
-      ]
-    },
-    "network": {
-      "allowUnixSockets": [
-        "~/.local/state/herdr-core/default/default.sock",
-        "~/.config/herdr-app/herdr-app.sock",
-        "~/.config/herdr/herdr.sock"
       ]
     },
     "credentials": {
@@ -272,6 +247,17 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/trim-command-log.sh",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/verify.sh",
+            "timeout": 600
           }
         ]
       }
