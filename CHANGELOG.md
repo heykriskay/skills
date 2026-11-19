@@ -22,6 +22,8 @@ See [docs/decisions/0006](docs/decisions/0006-lean-on-built-ins.md).
 - `examples/settings.json`: no pinned model (default Opus 5.5 at medium effort), Herdr permissions moved
   out, Stop hook added. `examples/CLAUDE.md` cut to what Claude can't infer. Removed `examples/mcp.json`.
 - `docs/research/`: the research behind this release, with sources.
+- `examples/settings.json` turns on experimental Code Mode (`CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1`). It needs
+  feature-flag fetching, so `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is replaced by `DISABLE_ERROR_REPORTING`.
 
 ## 1.0.0 - 2026-11-16
 
