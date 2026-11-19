@@ -1,6 +1,6 @@
 ---
 name: spec
-description: "Settle an ambiguous feature with the user and write it down as a short spec at `specs/YYYY-MM-DD-<slug>.md`. Use when the user hands over a user story, assignment or vague feature request, asks to be grilled, or says /spec. Skip it for clear, small changes: use plan mode instead."
+description: "Settle a feature with the user and write it down as a short spec at `specs/YYYY-MM-DD-<slug>.md`. Use when the user hands over a user story, assignment or feature request, asks to be grilled, or says /spec. Skip it for small fixes with nothing left to decide."
 argument-hint: "The feature or idea to pin down"
 ---
 
@@ -31,4 +31,4 @@ No file paths or code: they go stale. Show the path and ask for an OK.
 
 ## Next
 
-After the OK, enter plan mode to plan the implementation against the spec's acceptance criteria. For a large feature in Herdr, the `orchestrate` skill (kriskay-herdr plugin) takes it from here instead.
+After the OK, run `to-plan`. If `orchestrate` called you, return to it instead.
