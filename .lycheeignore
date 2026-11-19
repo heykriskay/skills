@@ -1,2 +1,6 @@
 # x.com refuses automated link checkers
 ^https://x\.com/
+# Sites that refuse automated checkers (403/429) though the pages exist
+^https://openai\.com/
+^https://tech-insider\.org/
+^https://venturebeat\.com/

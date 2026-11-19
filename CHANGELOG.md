@@ -5,6 +5,8 @@ the plugin version lives in `.claude-plugin/plugin.json`.
 
 ## Unreleased
 
+- Link check: pace GitHub and retry (`lychee.toml`); skip sites that refuse automated checkers.
+
 ## 2.0.0 - 2026-11-19
 
 Rebuilt around Lydia Hallie's "Rethinking Claude Code Best Practices" (Anthropic, Nov 2026): every step
