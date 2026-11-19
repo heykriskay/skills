@@ -1,6 +1,6 @@
 # 0001: You approve the spec, the plan and every commit
 
-- **Status:** Accepted
+- **Status:** Accepted, amended by [0006](0006-lean-on-built-ins.md)
 - **Date:** 2026-11-16
 
 ## Context

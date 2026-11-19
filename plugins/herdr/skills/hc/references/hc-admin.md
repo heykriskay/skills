@@ -1,8 +1,8 @@
+<!-- Maintainer note: trimmed from `hc --skill`; diff against upstream before updating. -->
 # hc admin reference
 
 Detail the core `hc` skill doesn't need: terminal sizing, remote machines,
-launch environment, recovery, updates, installs, platform quirks. Trimmed
-from `hc --skill`; diff against upstream before updating.
+launch environment, recovery, updates, installs, platform quirks.
 
 ## Terminal sizing and display
 

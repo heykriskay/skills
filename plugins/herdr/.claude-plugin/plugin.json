@@ -1,0 +1,13 @@
+{
+  "name": "kriskay-herdr",
+  "version": "1.0.0",
+  "description": "Optional add-on to kriskay-skills: run implementer and reviewer agents in visible Herdr panes, one worktree per feature.",
+  "author": {
+    "name": "heykriskay",
+    "url": "https://github.com/heykriskay"
+  },
+  "homepage": "https://github.com/heykriskay/skills/tree/main/plugins/herdr",
+  "repository": "https://github.com/heykriskay/skills",
+  "license": "MIT",
+  "keywords": ["herdr", "orchestration", "multi-agent", "worktree"]
+}

@@ -1,6 +1,6 @@
 ---
 name: orchestrate
-description: Take a feature from idea to reviewed commits in the Herdr app - grill, spec, then implementer and reviewer hc helpers in visible panes inside the feature's own worktree. The user approves the shape, every commit, and anything blocked. Use when the user runs /orchestrate or asks for an orchestrator, workers or parallel agents in Herdr.
+description: Take a feature from idea to reviewed commits in the Herdr app - spec, plan, then implementer and reviewer hc helpers in visible panes inside the feature's own worktree. The user approves the shape, every commit, and anything blocked. Use when the user runs /orchestrate or asks for an orchestrator, workers or parallel agents in Herdr.
 ---
 
 # Orchestrate workers with hc
@@ -9,7 +9,7 @@ You are the **orchestrator**. You stay in your terminal, talk to the user, and t
 
 ## Ground rules
 
-- **Ask the user at these gates, and only these:** the spec and plan (via `to-spec`/`to-plan`, which hand back to you), the shape (worktree, roles, `max_workers`), every commit (section 6), a worker `ASK`, `BLOCKED` or dispute, a 3rd fix round or a 2nd crash on one task, and worktree removal.
+- **Ask the user at these gates, and only these:** the spec and plan (via `spec`/`to-plan`, which hand back to you), the shape (worktree, roles, `max_workers`), every commit (section 6), a worker `ASK`, `BLOCKED` or dispute, a 3rd fix round or a 2nd crash on one task, and worktree removal.
 - Never commit, push, merge, rebase or open PRs on your own.
 - Never answer a worker's question or dialog yourself, and never `hc send --force` past one. Show it to the user.
 - You never implement or fix findings; workers do. You write only briefs, the ledger, specs and plans.
@@ -25,9 +25,9 @@ Workers cost 3-10× the tokens of doing it here. Say so at the shape gate. If th
 
 ## 1. Spec and plan
 
-1. `grilling` with the user until they confirm shared understanding.
-2. Create the worktree (section 2) **before** writing, so the spec lives on the feature branch.
-3. Write the spec (`to-spec`) and plan (`to-plan`) into the worktree. Each plan task `T<n>` is one implement → review → commit round.
+1. Create the worktree (section 2) **before** writing, so the spec lives on the feature branch.
+2. Run the `spec` skill (kriskay-skills plugin) to settle and write the spec into the worktree; it hands back to you.
+3. Run `to-plan` to write the plan next to it; it hands back to you. Each plan task `T<n>` is one implement → review → commit round.
 4. Pre-flight once: list task pairs that share a file or interface, and tasks that don't match the spec. The spec wins. Spec and plan go in the first commit.
 
 ## 2. Worktree and space

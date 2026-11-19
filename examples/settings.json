@@ -1,13 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "cleanupPeriodDays": 30,
-  "model": "sonnet",
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "300000",
     "BASH_MAX_TIMEOUT_MS": "1200000",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_ENABLE_TODO_TOOLS": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE": "1",
     "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1",
-    "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB": "1"
+    "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB": "1",
+    "DISABLE_ERROR_REPORTING": "1"
   },
   "attribution": {
     "commit": "",
@@ -15,29 +16,9 @@
   },
   "permissions": {
     "allow": [
-      "WebFetch(domain:code.claude.com)",
-      "Bash(hc ls*)",
-      "Bash(hc get *)",
-      "Bash(hc read *)",
-      "Bash(hc wait*)",
-      "Bash(hc templates*)",
-      "Bash(hc label *)",
-      "Bash(hc kill *)",
-      "Bash(hc rm *)",
-      "Bash(hc interrupt *)",
-      "Bash(hc --skill)",
-      "Bash(herdr-app ls*)",
-      "Bash(herdr-app status*)",
-      "Bash(herdr-app commands*)",
-      "Bash(herdr-app shot*)",
-      "Bash(herdr-app --skill)",
-      "Bash(herdr --skill)"
+      "WebFetch(domain:code.claude.com)"
     ],
     "deny": [
-      "Bash(git push)",
-      "Bash(git push *)",
-      "Bash(git -C * push*)",
-      "Bash(git -c * push*)",
       "Bash(git reset --hard)",
       "Bash(git reset --hard *)",
       "Bash(git checkout -- *)",
@@ -45,14 +26,17 @@
       "Bash(git stash drop*)",
       "Bash(git stash clear)",
       "Bash(git clean -f*)",
-      "Bash(git branch -D*)",
-      "Bash(git rebase)",
-      "Bash(git rebase *)",
-      "Bash(git filter-branch)",
-      "Bash(git filter-branch *)",
-      "Bash(git commit --no-verify*)",
-      "Bash(git commit * --no-verify*)",
-      "Bash(git commit -n *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * --force*)",
+      "Bash(git push * -f*)",
+      "Bash(git push * +*)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(rm -rf ..*)",
+      "Bash(rm -fr /*)",
+      "Bash(rm -fr ~*)",
+      "Bash(rm -fr ..*)",
       "Bash(security find-generic-password*)",
       "Bash(security find-internet-password*)",
       "Bash(security dump-keychain*)",
@@ -88,12 +72,35 @@
       "Edit(~/.claude/statusline.sh)"
     ],
     "ask": [
-      "Agent(model:opus)",
-      "Bash(git commit --amend*)",
+      "Bash(git push)",
+      "Bash(git push *)",
+      "Bash(git -C * push*)",
+      "Bash(git -c * push*)",
+      "Bash(gh pr create *)",
       "Bash(sudo *)"
     ],
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable"
+  },
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Source control: GitHub user heykriskay (github.com/heykriskay) and all repos under it",
+      "Internal package registry: none. Installs come from the public registries: npm (registry.npmjs.org), PyPI (pypi.org, files.pythonhosted.org), Maven Central (repo.maven.apache.org, repo1.maven.org), Gradle (plugins.gradle.org, services.gradle.org) and the Go module proxy (proxy.golang.org, sum.golang.org)",
+      "Trusted cloud buckets: none",
+      "Sensitive remote targets: every Kubernetes or OpenShift context except local ones (kind-*, k3d-*, minikube, docker-desktop, rancher-desktop, colima, crc)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "codex@openai-codex": true
   },
   "statusLine": {
     "type": "command",
@@ -111,13 +118,6 @@
         "~/.claude/agents",
         "~/.claude/rules",
         "~/.claude/statusline.sh"
-      ]
-    },
-    "network": {
-      "allowUnixSockets": [
-        "~/.local/state/herdr-core/default/default.sock",
-        "~/.config/herdr-app/herdr-app.sock",
-        "~/.config/herdr/herdr.sock"
       ]
     },
     "credentials": {
@@ -213,6 +213,22 @@
           "mode": "deny"
         }
       ]
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "objects.githubusercontent.com",
+        "raw.githubusercontent.com",
+        "registry.npmjs.org",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "repo.maven.apache.org",
+        "repo1.maven.org",
+        "plugins.gradle.org",
+        "services.gradle.org",
+        "proxy.golang.org",
+        "sum.golang.org"
+      ]
     }
   },
   "hooks": {
@@ -272,6 +288,41 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/trim-command-log.sh",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/verify.sh full",
+            "timeout": 900
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/guard-kube.sh",
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/verify.sh touched",
+            "timeout": 600
           }
         ]
       }

@@ -1,6 +1,7 @@
 ---
+# Overrides the built-in Explore agent, which runs on the main model, so searches run on haiku.
 name: Explore
-description: Fast read-only search of code, logs and docs with a cited summary. Use for finding files, tracing code paths and answering "where/how does X work" questions. Replaces the built-in Explore (opus on a Claude subscription) so searches run on haiku.
+description: Fast read-only search of code, logs and docs with a cited summary. Use for finding files, tracing code paths and answering "where/how does X work" questions.
 model: haiku
 effort: low
 tools: Read, Grep, Glob, Bash

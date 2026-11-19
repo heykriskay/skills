@@ -9,7 +9,12 @@
     {
       "name": "kriskay-skills",
       "source": ".",
-      "description": "Idea → spec → plan → tested commits → PR, with you approving each step."
+      "description": "A lean setup on top of Claude Code's built-ins: spec and PR skills, a haiku search agent, lint and verify hooks."
+    },
+    {
+      "name": "kriskay-herdr",
+      "source": "./plugins/herdr",
+      "description": "Optional: implementer and reviewer agents in visible Herdr panes, one worktree per feature."
     }
   ]
 }

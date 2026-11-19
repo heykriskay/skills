@@ -30,4 +30,4 @@ The orchestrator prepares one diff per review:
 hc exec --cwd "<worktree>" sh -c 'git add -N . && git diff HEAD > .orchestrate/<attempt>-r<R>.diff'
 ```
 
-The reviewer checks the implementer's report as claims, opens with `READY` or `NOT READY`, then criteria and findings `Critical / Important / Minor` (`file:line`, problem, fix). Test tampering is Important. Findings go to `.orchestrate/<attempt>-r<R>.md`; on `NOT READY` with "forward: yes" they go straight to the implementer.
+The reviewer's output and forwarding rules are in `agents/reviewer.md`.
