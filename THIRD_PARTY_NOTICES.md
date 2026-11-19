@@ -6,10 +6,9 @@ copyright notices apply to those parts; see the LICENSE file in each upstream re
 | Skills in this repo | Upstream | License |
 |---|---|---|
 | `spec` (interview approach from `grilling` and `to-spec`) | https://github.com/mattpocock/skills | MIT |
+| `test-driven-development`, `to-plan`, `execute-plan` | https://github.com/obra/superpowers | MIT |
 | `pr` | https://github.com/humanlayer/skills (`show-me`) | MIT |
 | `hc` (in `plugins/herdr`) | https://github.com/herdrdev/herdr-core (`hc --skill`) | Apache License 2.0 |
-
-Versions before 2.0.0 also included skills adapted from https://github.com/obra/superpowers (MIT).
 
 All of the above were trimmed, reworded and wired together into one workflow. Changes are by the contributors of this repo.
 

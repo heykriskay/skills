@@ -1,8 +1,8 @@
-# 0006: Lean on Claude Code's built-ins; enforce with hooks, not prompts
+# 0006: Every step out of the loop gets a replacement
 
 - **Status:** Accepted
 - **Date:** 2026-11-19
-- **Supersedes:** [0002](0002-test-first.md), [0003](0003-adapt-upstream-skills.md); amends [0001](0001-approval-gates.md) and [0005](0005-orchestration-is-opt-in.md)
+- **Supersedes:** [0003](0003-adapt-upstream-skills.md); amends [0001](0001-approval-gates.md), [0002](0002-test-first.md) and [0005](0005-orchestration-is-opt-in.md)
 
 ## Context
 
@@ -16,18 +16,23 @@ The research is in [docs/research](../research/modern-claude-code-setup-2026.md)
 
 ## Decision
 
-- Keep only skills that hold my own taste or knowledge Claude can't infer: `spec` and `pr`.
-- Checks that must run are hooks: `lint.sh` on every edit, `verify.sh` when Claude stops after
-  changing code. Both exit 2 so Claude has to fix the failure.
-- Approval gates (0001) stay, but as one line in CLAUDE.md plus deny rules on `git push` and history
-  rewrites, and plan-mode approval replaces the separate plan gate.
-- Herdr orchestration (0005) moves to its own optional plugin, `kriskay-herdr`.
-- Keep the `Explore` override on haiku: the built-in now runs on the main model.
+Following Lydia Hallie's "Rethinking Claude Code Best Practices" talk, each thing I used to do in the loop
+moves to something that does it without me:
+
+- **Steering → the model.** Instructions say only what Claude can't infer. The spec → plan → TDD → commit
+  → PR skills stay as my process, slimmed; `/doctor prompt-audit` runs after model upgrades.
+- **Approving → auto mode.** Trusted infrastructure is described in `autoMode.environment`.
+- **Saying no → deny rules and the sandbox.** A deny rule only where a mistake can't be taken back; the
+  sandbox stops what an approved command's code does once it runs. Projects commit their own rules.
+- **Checking → hooks and CI.** Lint on edit, touched tests on task completion, the full suite on stop, all
+  exiting 2; CI runs the same checks on every PR.
+- Herdr orchestration (0005) moves to its own optional plugin.
 
 ## Consequences
 
-- About 1,000 fewer lines of instructions loaded or available in every session.
-- Upgrades to Claude Code's built-ins reach me without edits here.
-- "Test first" is no longer forced. The verify hook makes sure tests pass, not that they were written
-  first; ask for TDD in the prompt when it matters.
-- 1.0 users lose the skill names they knew; the changelog maps each to its replacement.
+- Instructions shrink from about 1,500 to about 400 lines; checks that must run no longer depend on Claude
+  remembering them.
+- "Test first" stays a skill, not a guarantee; the hooks guarantee the tests pass.
+- Stop runs the suite after every turn that changed code, which costs time on slow suites; it skips
+  unchanged trees.
+- Four 1.0 skills are gone; the changelog maps each to its replacement.
