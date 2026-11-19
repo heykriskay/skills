@@ -1,0 +1,9 @@
+# ~/.codex/config.toml: the same safety model as the Claude settings.
+# Codex reads AGENTS.md natively; skills come from ~/.agents/skills (install.sh --codex).
+
+# Writes stay in the workspace, no network from commands, and Codex asks before leaving that box.
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[sandbox_workspace_write]
+network_access = false

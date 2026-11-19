@@ -91,6 +91,17 @@
       "Sensitive remote targets: every Kubernetes or OpenShift context except local ones (kind-*, k3d-*, minikube, docker-desktop, rancher-desktop, colima, crc)"
     ]
   },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "codex@openai-codex": true
+  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"

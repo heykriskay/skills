@@ -36,7 +36,7 @@ cd skills && ./install.sh          # add --herdr for the Herdr add-on
 ```
 
 Then merge [examples/settings.json](examples/settings.json) into `~/.claude/settings.json` and
-[examples/CLAUDE.example.md](examples/CLAUDE.example.md) into `~/.claude/CLAUDE.md`. Hooks need `jq`;
+[examples/AGENTS.example.md](examples/AGENTS.example.md) into `~/.claude/CLAUDE.md`. Hooks need `jq`;
 the sandbox on Linux needs `bubblewrap` and `socat`. Use one way, not both.
 
 **Per project**, copy this repo's [.claude/settings.json](.claude/settings.json) and adjust its
@@ -58,7 +58,32 @@ spec → to-plan → execute-plan (test first, a commit per task) → pr
 | `commit` | Proposes a Conventional Commits message, commits after your OK. |
 | `pr` | PR body with a summary sketch, before/after evidence and merge danger. |
 
+| `delegate` | Picks where a task goes: a cheap search agent, `/batch`, a cloud session, or Codex for a second opinion. |
+
 Built-ins cover the rest: `/code-review`, `/simplify`, `/security-review`, `/goal`, `/rename` + `/resume`.
+
+## Claude, Codex and OpenCode together
+
+One source, read by all three. Claude stays the main agent; the others are a second opinion or a
+second pair of hands, and their output is advice that Claude checks.
+
+| Shared piece | Claude Code | Codex | OpenCode |
+|---|---|---|---|
+| Instructions | `.claude/CLAUDE.md` imports `@../AGENTS.md` | `AGENTS.md` | `AGENTS.md` |
+| Your global file | `~/.claude/CLAUDE.md` | `~/.codex/AGENTS.md` | `~/.config/opencode/AGENTS.md` |
+| Skills | `~/.claude/skills` | `~/.agents/skills` (`install.sh --codex` links them) | reads `~/.claude/skills` |
+| Safety | `examples/settings.json` | [examples/codex/config.toml](examples/codex/config.toml): workspace-write sandbox, no network | [examples/opencode/opencode.json](examples/opencode/opencode.json): the same deny rules |
+| Checks | hooks | the same scripts via [examples/codex/hooks.json](examples/codex/hooks.json) | no command hooks; rely on CI |
+
+Link your global instructions once: `ln -s ~/.claude/CLAUDE.md ~/.codex/AGENTS.md` and
+`ln -s ~/.claude/CLAUDE.md ~/.config/opencode/AGENTS.md`. Codex asks you to trust new hooks the first time.
+
+**Picking the agent.** The `delegate` skill decides when work leaves the session, from its description:
+search goes to the haiku `Explore` agent, repeated edits to `/batch`, long or ambiguous work to a cloud
+session (`claude --cloud`), and a second opinion to Codex through OpenAI's
+[Codex plugin for Claude Code](https://github.com/openai/codex-plugin-cc) (`/codex:adversarial-review`,
+`/codex:rescue`, `/codex:review`), which `examples/settings.json` enables. Run `/codex:setup` once.
+Everything else stays in the session: extra agents cost far more tokens than they usually save.
 
 ## Checks
 

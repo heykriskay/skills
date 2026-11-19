@@ -20,6 +20,8 @@ say no, hooks and CI check. See [docs/decisions/0006](docs/decisions/0006-lean-o
 - **Saying no:** deny rules only for what can't be undone (secret reads, discarding uncommitted work,
   force-push, `rm -rf` outside the repo); `guard-kube.sh` blocks `kubectl`/`oc` delete or apply on
   non-local contexts. The repo commits its own rules and sandbox in `.claude/settings.json`.
+  `git commit` runs outside the sandbox (`excludedCommands`) so commit signing, which talks to a local
+  service, keeps working.
 - **Checking:** `lint.sh` covers shell, YAML, Go, Python and JS/TS; `verify.sh` runs the touched tests on
   `TaskCompleted` and the full suite on `Stop` (Go, Maven/Gradle, pytest, npm/pnpm/yarn), exiting 2 until
   they pass. `scripts/test-hooks.sh` tests the hooks in CI.
@@ -28,7 +30,12 @@ say no, hooks and CI check. See [docs/decisions/0006](docs/decisions/0006-lean-o
   model (`CLAUDE_CODE_ENABLE_TODO_TOOLS`) so `TaskCompleted` fires. No pinned model.
 - **Breaking:** `hc`, `orchestrate`, `implementer` and `reviewer` moved to the optional `kriskay-herdr`
   plugin (`plugins/herdr`); `./install.sh --herdr` installs them.
-- `examples/CLAUDE.md` is now `examples/CLAUDE.example.md`, so it doesn't load as live instructions.
+- **Several agents:** one `AGENTS.md` for Claude Code, Codex and OpenCode (`.claude/CLAUDE.md` moved there).
+  New `delegate` skill routes work to a cheap search agent, `/batch`, a cloud session or Codex; OpenAI's
+  Codex plugin for Claude Code is enabled in `examples/settings.json`. `examples/codex/` and
+  `examples/opencode/` mirror the sandbox, deny rules and hooks; `install.sh --codex` links skills into
+  `~/.agents/skills`.
+- `examples/CLAUDE.md` is now `examples/AGENTS.example.md`, so it doesn't load as live instructions.
   Removed `examples/mcp.json`. Research behind this release in `docs/research/`.
 
 ## 1.0.0 - 2026-11-16

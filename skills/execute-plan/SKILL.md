@@ -22,7 +22,7 @@ You stop for: each task's commit (through `commit`), anything irreversible or se
 
 ## Finish
 
-Run `/code-review` against the **Base** commit. Fix Critical and Important findings with a reproducing test each and commit them; list Minor ones as deferred. Then report, in one message:
+Run `/code-review` against the **Base** commit (and, for a risky change, a second opinion through `delegate`). Fix Critical and Important findings with a reproducing test each and commit them; list Minor ones as deferred. Then report, in one message:
 
 - each acceptance criterion with the command or test that proves it, and its actual output
 - the rulings you made

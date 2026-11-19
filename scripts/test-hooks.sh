@@ -34,7 +34,7 @@ denied() { # denied <name> <command>: guard-kube must return a deny decision
 }
 repo() { # repo <dir>: fresh git repo with everything committed
   git -C "$1" init -q && git -C "$1" add -A &&
-    git -C "$1" -c user.email=t@t -c user.name=t commit -qm init
+    git -C "$1" -c user.email=t@t -c user.name=t -c commit.gpgsign=false commit -qm init
 }
 
 # guard-kube
