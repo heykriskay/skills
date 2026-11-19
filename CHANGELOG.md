@@ -36,7 +36,8 @@ say no, hooks and CI check. See [docs/decisions/0006](docs/decisions/0006-lean-o
   `examples/opencode/` mirror the sandbox, deny rules and hooks; `install.sh --codex` links skills into
   `~/.agents/skills`.
 - `examples/CLAUDE.md` is now `examples/AGENTS.example.md`, so it doesn't load as live instructions.
-  Removed `examples/mcp.json`. Research behind this release in `docs/research/`.
+  Removed `examples/mcp.json`. Research behind this release in `docs/research/`; `docs/blueprint.md` lays
+  the whole setup out in build order, with what's done and what's missing.
 
 ## 1.0.0 - 2026-11-16
 

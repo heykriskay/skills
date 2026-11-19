@@ -15,7 +15,8 @@ every step I take out of the loop needs a replacement.
 | Check | Hooks and CI | Lint on every edit, touched tests when a task completes, the full suite when Claude stops |
 
 Feel free to use it, copy it or change it to fit your own workflow. Research and sources:
-[docs/research](docs/research/modern-claude-code-setup-2026.md).
+[docs/research](docs/research/modern-claude-code-setup-2026.md). Building your own from zero? Start with
+the [blueprint](docs/blueprint.md): the same setup in build order, with what's done and what's missing.
 
 ## Install
 
