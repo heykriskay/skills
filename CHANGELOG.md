@@ -20,8 +20,8 @@ say no, hooks and CI check. See [docs/decisions/0006](docs/decisions/0006-lean-o
 - **Saying no:** deny rules only for what can't be undone (secret reads, discarding uncommitted work,
   force-push, `rm -rf` outside the repo); `guard-kube.sh` blocks `kubectl`/`oc` delete or apply on
   non-local contexts. The repo commits its own rules and sandbox in `.claude/settings.json`.
-  `git commit` runs outside the sandbox (`excludedCommands`) so commit signing, which talks to a local
-  service, keeps working.
+  `git commit` and `git push` run outside the sandbox (`excludedCommands`): commit signing talks to a
+  local service, and push needs the GitHub token the sandbox strips from every other command.
 - **Checking:** `lint.sh` covers shell, YAML, Go, Python and JS/TS; `verify.sh` runs the touched tests on
   `TaskCompleted` and the full suite on `Stop` (Go, Maven/Gradle, pytest, npm/pnpm/yarn), exiting 2 until
   they pass. `scripts/test-hooks.sh` tests the hooks in CI.

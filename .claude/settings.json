@@ -33,7 +33,7 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false,
-    "excludedCommands": ["git commit *"],
+    "excludedCommands": ["git commit *", "git push *"],
     "filesystem": {
       "denyRead": [
         "./**/.env",
